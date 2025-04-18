@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Kode Berkah</title>
+</head>
+<body>
+  <h2>Tambah Kode Berkah</h2>
+  <input type="text" id="newCode" placeholder="Masukkan kode">
+  <button onclick="addCode()">Tambah</button>
+
+  <script>
+    function addCode() {
+      const code = document.getElementById("newCode").value.trim();
+      if (!code) return alert("Kode tidak boleh kosong!");
+
+      let codes = JSON.parse(localStorage.getItem("kodeBerkah")) || {};
+      if (codes[code]) return alert("Kode sudah ada!");
+
+      codes[code] = 0; // Jumlah penggunaan
+      localStorage.setItem("kodeBerkah", JSON.stringify(codes));
+      alert("Kode ditambahkan!");
+      document.getElementById("newCode").value = "";
+    }
+  </script>
+</body>
+</html>
